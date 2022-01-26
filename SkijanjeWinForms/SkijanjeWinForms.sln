@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30225.117
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI", "SkijanjeWinForms\UI.csproj", "{04B17288-558F-43AA-9EB5-D5245C0E870F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{125FC2CD-4353-4CDE-BD50-BB4993F0DB7D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{04B17288-558F-43AA-9EB5-D5245C0E870F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04B17288-558F-43AA-9EB5-D5245C0E870F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04B17288-558F-43AA-9EB5-D5245C0E870F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04B17288-558F-43AA-9EB5-D5245C0E870F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{125FC2CD-4353-4CDE-BD50-BB4993F0DB7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{125FC2CD-4353-4CDE-BD50-BB4993F0DB7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{125FC2CD-4353-4CDE-BD50-BB4993F0DB7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{125FC2CD-4353-4CDE-BD50-BB4993F0DB7D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {5E1DBD4A-DF6C-45B0-8409-1B03D3D6FA78}
+	EndGlobalSection
+EndGlobal
