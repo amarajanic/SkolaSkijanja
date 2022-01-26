@@ -139,7 +139,7 @@ namespace UI.Forme
                 {
                     DataGridViewRow row = dgvInstrukcije.Rows[e.RowIndex];
 
-                    var Id = (int)row.Cells[2].Value; //za sada
+                    var Id = (int)row.Cells[3].Value; //za sada
 
                     frmInstrukcijaDetalji frm = new frmInstrukcijaDetalji(Id);
 
