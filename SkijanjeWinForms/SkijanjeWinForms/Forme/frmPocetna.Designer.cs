@@ -29,30 +29,53 @@
         private void InitializeComponent()
         {
             this.dgvInstrukcije = new System.Windows.Forms.DataGridView();
+            this.dgvBtnDetalji = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.dgvBtnPromijeni = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.dgvBtnUcenici = new System.Windows.Forms.DataGridViewButtonColumn();
             this.dtpPocetak = new System.Windows.Forms.DateTimePicker();
             this.dtpKraj = new System.Windows.Forms.DateTimePicker();
             this.cbInstruktori = new System.Windows.Forms.ComboBox();
             this.btnPretrazi = new System.Windows.Forms.Button();
             this.btnDodajInstrukciju = new System.Windows.Forms.Button();
-            this.dgvBtnDetalji = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.dgvBtnPromijeni = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.dgvBtnUcenici = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.dgvBtnObrisi = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInstrukcije)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvInstrukcije
             // 
+            this.dgvInstrukcije.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.dgvInstrukcije.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvInstrukcije.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvInstrukcije.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.dgvBtnDetalji,
             this.dgvBtnPromijeni,
-            this.dgvBtnUcenici});
+            this.dgvBtnUcenici,
+            this.dgvBtnObrisi});
             this.dgvInstrukcije.Location = new System.Drawing.Point(12, 170);
             this.dgvInstrukcije.Name = "dgvInstrukcije";
             this.dgvInstrukcije.RowTemplate.Height = 25;
             this.dgvInstrukcije.Size = new System.Drawing.Size(776, 268);
             this.dgvInstrukcije.TabIndex = 0;
             this.dgvInstrukcije.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvInstrukcije_CellContentClick);
+            // 
+            // dgvBtnDetalji
+            // 
+            this.dgvBtnDetalji.HeaderText = "Detalji";
+            this.dgvBtnDetalji.Name = "dgvBtnDetalji";
+            // 
+            // dgvBtnPromijeni
+            // 
+            this.dgvBtnPromijeni.HeaderText = "Promijeni";
+            this.dgvBtnPromijeni.Name = "dgvBtnPromijeni";
+            // 
+            // dgvBtnUcenici
+            // 
+            this.dgvBtnUcenici.HeaderText = "Učenici";
+            this.dgvBtnUcenici.Name = "dgvBtnUcenici";
+            this.dgvBtnUcenici.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.dgvBtnUcenici.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
             // dtpPocetak
             // 
@@ -98,25 +121,10 @@
             this.btnDodajInstrukciju.UseVisualStyleBackColor = true;
             this.btnDodajInstrukciju.Click += new System.EventHandler(this.btnDodajInstrukciju_Click);
             // 
-            // dgvBtnDetalji
+            // dgvBtnObrisi
             // 
-            this.dgvBtnDetalji.HeaderText = "Detalji";
-            this.dgvBtnDetalji.Name = "dgvBtnDetalji";
-            this.dgvBtnDetalji.Width = 70;
-            // 
-            // dgvBtnPromijeni
-            // 
-            this.dgvBtnPromijeni.HeaderText = "Promijeni";
-            this.dgvBtnPromijeni.Name = "dgvBtnPromijeni";
-            this.dgvBtnPromijeni.Width = 70;
-            // 
-            // dgvBtnUcenici
-            // 
-            this.dgvBtnUcenici.HeaderText = "Učenici";
-            this.dgvBtnUcenici.Name = "dgvBtnUcenici";
-            this.dgvBtnUcenici.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.dgvBtnUcenici.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.dgvBtnUcenici.Width = 70;
+            this.dgvBtnObrisi.HeaderText = "Obriši";
+            this.dgvBtnObrisi.Name = "dgvBtnObrisi";
             // 
             // frmPocetna
             // 
@@ -148,5 +156,6 @@
         private System.Windows.Forms.DataGridViewButtonColumn dgvBtnDetalji;
         private System.Windows.Forms.DataGridViewButtonColumn dgvBtnPromijeni;
         private System.Windows.Forms.DataGridViewButtonColumn dgvBtnUcenici;
+        private System.Windows.Forms.DataGridViewButtonColumn dgvBtnObrisi;
     }
 }

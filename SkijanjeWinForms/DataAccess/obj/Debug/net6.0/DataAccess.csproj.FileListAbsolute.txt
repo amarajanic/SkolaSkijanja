@@ -12,3 +12,16 @@ C:\Users\Pc\source\repos\SkijanjeWinForms\DataAccess\obj\Debug\net6.0\DataAccess
 C:\Users\Pc\source\repos\SkijanjeWinForms\DataAccess\obj\Debug\net6.0\ref\DataAccess.dll
 C:\Users\Pc\source\repos\SkijanjeWinForms\DataAccess\obj\Debug\net6.0\DataAccess.pdb
 C:\Users\Pc\source\repos\SkijanjeWinForms\DataAccess\obj\Debug\net6.0\DataAccess.genruntimeconfig.cache
+C:\Users\Pc\Desktop\Test\SkolaSkijanja-main\SkijanjeWinForms\DataAccess\bin\Debug\net6.0\DataAccess.deps.json
+C:\Users\Pc\Desktop\Test\SkolaSkijanja-main\SkijanjeWinForms\DataAccess\bin\Debug\net6.0\DataAccess.runtimeconfig.json
+C:\Users\Pc\Desktop\Test\SkolaSkijanja-main\SkijanjeWinForms\DataAccess\bin\Debug\net6.0\DataAccess.dll
+C:\Users\Pc\Desktop\Test\SkolaSkijanja-main\SkijanjeWinForms\DataAccess\bin\Debug\net6.0\ref\DataAccess.dll
+C:\Users\Pc\Desktop\Test\SkolaSkijanja-main\SkijanjeWinForms\DataAccess\bin\Debug\net6.0\DataAccess.pdb
+C:\Users\Pc\Desktop\Test\SkolaSkijanja-main\SkijanjeWinForms\DataAccess\obj\Debug\net6.0\DataAccess.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Pc\Desktop\Test\SkolaSkijanja-main\SkijanjeWinForms\DataAccess\obj\Debug\net6.0\DataAccess.AssemblyInfoInputs.cache
+C:\Users\Pc\Desktop\Test\SkolaSkijanja-main\SkijanjeWinForms\DataAccess\obj\Debug\net6.0\DataAccess.AssemblyInfo.cs
+C:\Users\Pc\Desktop\Test\SkolaSkijanja-main\SkijanjeWinForms\DataAccess\obj\Debug\net6.0\DataAccess.csproj.CoreCompileInputs.cache
+C:\Users\Pc\Desktop\Test\SkolaSkijanja-main\SkijanjeWinForms\DataAccess\obj\Debug\net6.0\DataAccess.dll
+C:\Users\Pc\Desktop\Test\SkolaSkijanja-main\SkijanjeWinForms\DataAccess\obj\Debug\net6.0\ref\DataAccess.dll
+C:\Users\Pc\Desktop\Test\SkolaSkijanja-main\SkijanjeWinForms\DataAccess\obj\Debug\net6.0\DataAccess.pdb
+C:\Users\Pc\Desktop\Test\SkolaSkijanja-main\SkijanjeWinForms\DataAccess\obj\Debug\net6.0\DataAccess.genruntimeconfig.cache

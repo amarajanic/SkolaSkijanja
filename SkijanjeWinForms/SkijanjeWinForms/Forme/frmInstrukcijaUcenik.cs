@@ -28,33 +28,22 @@ namespace UI.Forme
 
         private void frmInstrukcijaUcenik_Load(object sender, EventArgs e)
         {
-            var identifikator = new NpgsqlParameter("identifikator", NpgsqlTypes.NpgsqlDbType.Integer);
-
-            identifikator.Value = instrukcijaId;
-
-            //var ucenici = db.UcenikModels.FromSqlRaw("select * from fn_Unenik_select_by_instrukcija_id(@identifikator)", identifikator).ToList();
-
-            var uceniciEnt = db.Uceniks.ToList();
-            var ucenici = uceniciEnt.Select(x => new UcenikModel
-            {
-                Id = x.Id,
-                Ime = x.Ime,
-                Prezime = x.Prezime,
-                Dat_Rodj = x.DatRodj,
-                Kontakt_Tel = x.KontaktTel,
-                Spol = x.Spol
-            }).ToList();
-       
-
-            dgvUcenici.DataSource = ucenici;
-
-            dgvUcenici.Columns["id"].Visible = false;
+            RefreshDataGrid();
         }
 
         private void dtnDodajUcenika_Click(object sender, EventArgs e)
         {
-            frmUcenikDodaj frm = new frmUcenikDodaj();
+            frmDostupniUcenici frm = new frmDostupniUcenici(instrukcijaId);
+            frm.FormClosing += new FormClosingEventHandler(UcenikDodajFormClosing);
             frm.Show();
+
+
+
+        }
+
+        private void UcenikDodajFormClosing(object sender, FormClosingEventArgs e)
+        {
+            RefreshDataGrid();
         }
 
         private void btnDostupniUc_Click(object sender, EventArgs e)
@@ -65,6 +54,23 @@ namespace UI.Forme
         private void dgvUcenici_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void RefreshDataGrid()
+        {
+            dgvUcenici.DataSource = null;
+
+            var identifikator = new NpgsqlParameter("identifikator", NpgsqlTypes.NpgsqlDbType.Integer);
+
+            identifikator.Value = instrukcijaId;
+
+            var ucenici = db.UcenikModels.FromSqlRaw("select * from fn_Unenik_select_by_instrukcija_id(@identifikator)", identifikator).ToList();
+
+
+
+            dgvUcenici.DataSource = ucenici;
+
+            dgvUcenici.Columns["id"].Visible = false;
         }
     }
 }

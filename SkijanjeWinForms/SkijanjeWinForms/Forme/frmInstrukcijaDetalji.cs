@@ -19,10 +19,6 @@ namespace UI.Forme
         skijanje_dbContext db;
         private int id;
 
-        //public frmInstrukcijaDetalji()
-        //{
-            
-        //}
 
         public frmInstrukcijaDetalji(int id)
         {

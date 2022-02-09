@@ -11,6 +11,7 @@ using DataAccess;
 using DataAccess.Models;
 using Microsoft.EntityFrameworkCore;
 using Npgsql;
+using System.Windows;
 
 namespace UI.Forme
 {
@@ -19,7 +20,6 @@ namespace UI.Forme
         skijanje_dbContext db;
 
         
-
         public frmPocetna()
         {
             InitializeComponent();
@@ -59,8 +59,120 @@ namespace UI.Forme
         }
 
         private void btnPretrazi_Click(object sender, EventArgs e)
-        {
+        {     
             
+            RefreshDataGrid();
+
+        }
+
+        private void btnDodajInstrukciju_Click(object sender, EventArgs e)
+        {
+           
+                frmInstrukcija frm = new frmInstrukcija();
+                frm.FormClosing += new FormClosingEventHandler(InstrukcijaFormClosing);
+                frm.ShowDialog();
+            
+            
+        }
+
+        private void InstrukcijaFormClosing(object sender, FormClosingEventArgs e)
+        {
+            if(dgvInstrukcije.DataSource!=null)
+            RefreshDataGrid();
+
+        }
+
+        private void InstrukcijaEditFormClosing(object sender, EventArgs e)
+        {
+            RefreshDataGrid();
+        }
+
+        private void cbInstruktori_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgvInstrukcije_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var senderGrid = (DataGridView)sender;
+            if(dgvInstrukcije.DataSource!=null)
+            {
+                if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
+                {
+                    if (senderGrid.Columns[e.ColumnIndex] == dgvInstrukcije.Columns["dgvBtnDetalji"])
+                    {
+                        DataGridViewRow row = dgvInstrukcije.Rows[e.RowIndex];
+
+                        var Id = (int)row.Cells[4].Value; //za sada
+
+                        frmInstrukcijaDetalji frm = new frmInstrukcijaDetalji(Id);
+
+                        frm.Show();
+                    }
+                    else if (senderGrid.Columns[e.ColumnIndex] == dgvInstrukcije.Columns["dgvBtnPromijeni"])
+                    {
+                        DataGridViewRow row = dgvInstrukcije.Rows[e.RowIndex];
+
+                        var instrukcijaId = (int)row.Cells[4].Value; //za sada
+
+                        var instruktorId = int.Parse(row.Cells[11].Value.ToString());
+
+                        frmInstrukcijaEdit frm = new frmInstrukcijaEdit(instrukcijaId, instruktorId);
+                        frm.FormClosing += new FormClosingEventHandler(InstrukcijaEditFormClosing);
+
+                        frm.Show();
+
+
+
+                        MessageBox.Show("Test");
+                    }
+                    else if (senderGrid.Columns[e.ColumnIndex] == dgvInstrukcije.Columns["dgvBtnUcenici"])
+                    {
+                        DataGridViewRow row = dgvInstrukcije.Rows[e.RowIndex];
+
+                        var instrukcijaId = (int)row.Cells[4].Value; //za sada
+
+                        frmInstrukcijaUcenik frm = new frmInstrukcijaUcenik(instrukcijaId);
+
+                        frm.Show();
+                    }
+                    else if (senderGrid.Columns[e.ColumnIndex] == dgvInstrukcije.Columns["dgvBtnObrisi"])
+                    {
+                        DialogResult dialogResult = MessageBox.Show("Jeste sigurni da želite obrisati taj zapis?", "Potvrda brisanja", MessageBoxButtons.YesNo);
+                        if (dialogResult == DialogResult.Yes)
+                        {
+                            var identifikator = new NpgsqlParameter("identifikator", NpgsqlTypes.NpgsqlDbType.Integer);
+
+
+                            DataGridViewRow row = dgvInstrukcije.Rows[e.RowIndex];
+
+                            var instrukcijaId = (int)row.Cells[4].Value; //za sada
+
+                            identifikator.Value = instrukcijaId;
+
+                            db.Database.ExecuteSqlRaw("select * from fn_Instrukcija_delete(@identifikator)", identifikator);
+
+                            RefreshDataGrid();
+                        }
+                        else if (dialogResult == DialogResult.No)
+                        {
+
+                        }
+                    }
+
+
+                }
+
+            }
+
+
+
+        }
+
+        private void RefreshDataGrid()
+        {
+            dgvInstrukcije.DataSource = null;
+
 
             var p = dtpPocetak.Value.Date;
 
@@ -91,91 +203,12 @@ namespace UI.Forme
 
 
 
-
-            var instrukcije = db.InstrukcijaPocetnaModels.FromSqlRaw("select * from fn_Instruktor_ime_prezime_datum(@ime,@prezime,@pocetak,@kraj)",ime,prezime,pocetak,kraj).ToList();
+            var instrukcije = db.InstrukcijaPocetnaModels.FromSqlRaw("select * from fn_Instruktor_ime_prezime_datum(@ime,@prezime,@pocetak,@kraj)", ime, prezime, pocetak, kraj).ToList();
 
             dgvInstrukcije.DataSource = instrukcije;
 
             dgvInstrukcije.Columns["id"].Visible = false;
             dgvInstrukcije.Columns["InstruktorId"].Visible = false;
-
-           
-           
-            DataGridViewColumn akcija = new DataGridViewColumn();
-
-            //akcija.
-
-            //dgvInstrukcije.Columns.Add("Action", "Action");
-
-
-
-
-
-
-
-
-
-
-        }
-
-        private void btnDodajInstrukciju_Click(object sender, EventArgs e)
-        {
-            frmInstrukcija frm = new frmInstrukcija();
-            frm.ShowDialog();
-        }
-
-        private void cbInstruktori_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dgvInstrukcije_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            var senderGrid = (DataGridView)sender;
-
-            if(senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex>=0)
-            {
-                if (senderGrid.Columns[e.ColumnIndex] == dgvInstrukcije.Columns["dgvBtnDetalji"])
-                {
-                    DataGridViewRow row = dgvInstrukcije.Rows[e.RowIndex];
-
-                    var Id = (int)row.Cells[3].Value; //za sada
-
-                    frmInstrukcijaDetalji frm = new frmInstrukcijaDetalji(Id);
-
-                    frm.Show();
-                }
-                else if (senderGrid.Columns[e.ColumnIndex] == dgvInstrukcije.Columns["dgvBtnPromijeni"])
-                {
-                    DataGridViewRow row = dgvInstrukcije.Rows[e.RowIndex];
-
-                    var instrukcijaId = (int)row.Cells[3].Value; //za sada
-
-                    var instruktorId = int.Parse(row.Cells[10].Value.ToString());
-
-                    frmInstrukcijaEdit frm = new frmInstrukcijaEdit(instrukcijaId,instruktorId);
-
-                    frm.Show();
-
-
-
-                    MessageBox.Show("Test");
-                }
-                else if(senderGrid.Columns[e.ColumnIndex] == dgvInstrukcije.Columns["dgvBtnUcenici"])
-                {
-                    DataGridViewRow row = dgvInstrukcije.Rows[e.RowIndex];
-
-                    var instrukcijaId = (int)row.Cells[3].Value; //za sada
-
-                    frmInstrukcijaUcenik frm = new frmInstrukcijaUcenik(instrukcijaId);
-
-                    frm.Show();
-                }
-
-              
-            }
-
-           
         }
     }
 }

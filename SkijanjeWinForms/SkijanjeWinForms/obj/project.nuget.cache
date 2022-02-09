@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Qx42b/7PbLvlwk4p3U1P13nd3g0UOzczSh/36GHx8vhvjzCicdp5NHBbwNmfblF7q3fwqjBoN8UiwPjP2U53dg==",
+  "dgSpecHash": "OWN3bQ2mNEoZaQNMxw1qI00LFkRtN26jlvFtrBPOwwUh4Fj48dRzsOeqZfmDIe9ohqvR0X7UU9gUhONHSUu+bA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Pc\\source\\repos\\SkijanjeWinForms\\SkijanjeWinForms\\UI.csproj",
+  "projectFilePath": "C:\\Users\\Pc\\Desktop\\Test\\SkolaSkijanja-main\\SkijanjeWinForms\\SkijanjeWinForms\\UI.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Pc\\.nuget\\packages\\microsoft.codeanalysis.analyzers\\3.0.0\\microsoft.codeanalysis.analyzers.3.0.0.nupkg.sha512",
     "C:\\Users\\Pc\\.nuget\\packages\\microsoft.codeanalysis.common\\3.6.0\\microsoft.codeanalysis.common.3.6.0.nupkg.sha512",

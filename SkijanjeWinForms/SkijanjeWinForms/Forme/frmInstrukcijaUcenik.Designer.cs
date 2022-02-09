@@ -30,12 +30,12 @@
         {
             this.dgvUcenici = new System.Windows.Forms.DataGridView();
             this.dtnDodajUcenika = new System.Windows.Forms.Button();
-            this.btnUceniciUInstrukciji = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUcenici)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvUcenici
             // 
+            this.dgvUcenici.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvUcenici.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvUcenici.Location = new System.Drawing.Point(12, 12);
             this.dgvUcenici.Name = "dgvUcenici";
@@ -46,30 +46,19 @@
             // 
             // dtnDodajUcenika
             // 
-            this.dtnDodajUcenika.Location = new System.Drawing.Point(492, 245);
+            this.dtnDodajUcenika.Location = new System.Drawing.Point(468, 227);
             this.dtnDodajUcenika.Name = "dtnDodajUcenika";
-            this.dtnDodajUcenika.Size = new System.Drawing.Size(102, 42);
+            this.dtnDodajUcenika.Size = new System.Drawing.Size(126, 41);
             this.dtnDodajUcenika.TabIndex = 1;
-            this.dtnDodajUcenika.Text = "Dodaj novog učenika";
+            this.dtnDodajUcenika.Text = "Dodaj novog učenika u instrukciju";
             this.dtnDodajUcenika.UseVisualStyleBackColor = true;
             this.dtnDodajUcenika.Click += new System.EventHandler(this.dtnDodajUcenika_Click);
-            // 
-            // btnUceniciUInstrukciji
-            // 
-            this.btnUceniciUInstrukciji.Location = new System.Drawing.Point(383, 245);
-            this.btnUceniciUInstrukciji.Name = "btnUceniciUInstrukciji";
-            this.btnUceniciUInstrukciji.Size = new System.Drawing.Size(103, 42);
-            this.btnUceniciUInstrukciji.TabIndex = 2;
-            this.btnUceniciUInstrukciji.Text = "Učenici u instrukciji";
-            this.btnUceniciUInstrukciji.UseVisualStyleBackColor = true;
-            this.btnUceniciUInstrukciji.Click += new System.EventHandler(this.btnDostupniUc_Click);
             // 
             // frmInstrukcijaUcenik
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(606, 314);
-            this.Controls.Add(this.btnUceniciUInstrukciji);
+            this.ClientSize = new System.Drawing.Size(606, 281);
             this.Controls.Add(this.dtnDodajUcenika);
             this.Controls.Add(this.dgvUcenici);
             this.Name = "frmInstrukcijaUcenik";
@@ -84,6 +73,5 @@
 
         private System.Windows.Forms.DataGridView dgvUcenici;
         private System.Windows.Forms.Button dtnDodajUcenika;
-        private System.Windows.Forms.Button btnUceniciUInstrukciji;
     }
 }

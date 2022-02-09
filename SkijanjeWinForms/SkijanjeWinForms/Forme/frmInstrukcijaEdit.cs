@@ -22,11 +22,6 @@ namespace UI.Forme
         private int instruktorId;
 
 
-        //public frmInstrukcijaEdit()
-        //{
-
-        //}
-
         public frmInstrukcijaEdit(int instrukcijaId, int instruktorId)
         {
             InitializeComponent();
@@ -52,9 +47,7 @@ namespace UI.Forme
 
             var instrukcija = db.InstrukcijaModels.FromSqlRaw("select * from fn_Instrukcija_select_by_id(@instrukcija_id)", instrukcija_id).ToList().First();
 
-          //  var instruktor_id = new NpgsqlParameter("instruktor_id", NpgsqlTypes.NpgsqlDbType.Integer);
-
-            //instruktor_id.Value = instruktorId;
+       
 
             var selectedInstruktor = db.Instruktors.Where(x => x.Id == instruktorId).ToList();
 
@@ -72,18 +65,16 @@ namespace UI.Forme
             cbInstruktori.DataSource = cbInstruktor;
             cbInstruktori.DisplayMember = "ImePrezime";
 
-            //for (int i = 0; i < cbInstruktori.Items.Count; i++)
-            //{
-                if (cbInstruktori.SelectedItem as InstruktorModel != instruktorModel)
-                {
-                    cbInstruktori.SelectedText = null;
-                    cbInstruktori.Text = instruktorModel.ImePrezime;
+           
+            if (cbInstruktori.SelectedItem as InstruktorModel != instruktorModel)
+            {
+               cbInstruktori.SelectedText = null;
+               cbInstruktori.Text = instruktorModel.ImePrezime;
 
-                }
-            //}
+            }
+         
             
             rtbBiljeske.Text = instrukcija.Biljeske;
-
 
         }
 
@@ -112,9 +103,7 @@ namespace UI.Forme
 
             MessageBox.Show("Instrukcija je uspješno uređena!");
 
-
-
-
+            this.Close();
 
 
         }

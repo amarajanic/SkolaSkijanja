@@ -28,7 +28,13 @@ namespace UI.Forme
         private void btnDodajInstruktora_Click(object sender, EventArgs e)
         {
             frmInstruktor frm = new frmInstruktor();
+            frm.FormClosing += new FormClosingEventHandler(InstruktorFormClosing);
             frm.ShowDialog();
+        }
+
+        private void InstruktorFormClosing(object sender, FormClosingEventArgs e)
+        {
+            PopulateComboBox();
         }
 
         private void btnDodajInstrukciju_Click(object sender, EventArgs e)
@@ -63,19 +69,15 @@ namespace UI.Forme
 
             this.Close();
 
-            // db.SaveChanges();
-
-
-
-
-
-
-
-
 
         }
 
         private void frmInstrukcija_Load(object sender, EventArgs e)
+        {
+            PopulateComboBox();
+        }
+
+        void PopulateComboBox()
         {
             var instruktori = db.Instruktors.ToList();
 
