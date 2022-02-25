@@ -42,13 +42,12 @@
             this.dgvUcenici.RowTemplate.Height = 25;
             this.dgvUcenici.Size = new System.Drawing.Size(582, 199);
             this.dgvUcenici.TabIndex = 0;
-            this.dgvUcenici.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUcenici_CellContentClick);
             // 
             // dtnDodajUcenika
             // 
-            this.dtnDodajUcenika.Location = new System.Drawing.Point(468, 227);
+            this.dtnDodajUcenika.Location = new System.Drawing.Point(446, 227);
             this.dtnDodajUcenika.Name = "dtnDodajUcenika";
-            this.dtnDodajUcenika.Size = new System.Drawing.Size(126, 41);
+            this.dtnDodajUcenika.Size = new System.Drawing.Size(148, 41);
             this.dtnDodajUcenika.TabIndex = 1;
             this.dtnDodajUcenika.Text = "Dodaj novog učenika u instrukciju";
             this.dtnDodajUcenika.UseVisualStyleBackColor = true;
@@ -61,6 +60,7 @@
             this.ClientSize = new System.Drawing.Size(606, 281);
             this.Controls.Add(this.dtnDodajUcenika);
             this.Controls.Add(this.dgvUcenici);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "frmInstrukcijaUcenik";
             this.Text = "frmInstrukcijaUcenik";
             this.Load += new System.EventHandler(this.frmInstrukcijaUcenik_Load);

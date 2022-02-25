@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.tbIme = new System.Windows.Forms.TextBox();
             this.tbPrezime = new System.Windows.Forms.TextBox();
             this.cbSpol = new System.Windows.Forms.ComboBox();
@@ -46,7 +47,23 @@
             this.lblTel = new System.Windows.Forms.Label();
             this.tbTelefon = new System.Windows.Forms.TextBox();
             this.btnSpasi = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnPonisti = new System.Windows.Forms.Button();
+            this.epIme = new System.Windows.Forms.ErrorProvider(this.components);
+            this.epPrezime = new System.Windows.Forms.ErrorProvider(this.components);
+            this.epDatumRodj = new System.Windows.Forms.ErrorProvider(this.components);
+            this.epSpol = new System.Windows.Forms.ErrorProvider(this.components);
+            this.epTelefon = new System.Windows.Forms.ErrorProvider(this.components);
+            this.epIskustvo = new System.Windows.Forms.ErrorProvider(this.components);
+            this.epCV = new System.Windows.Forms.ErrorProvider(this.components);
+            this.epBiografija = new System.Windows.Forms.ErrorProvider(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.epIme)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epPrezime)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epDatumRodj)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epSpol)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epTelefon)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epIskustvo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epCV)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epBiografija)).BeginInit();
             this.SuspendLayout();
             // 
             // tbIme
@@ -55,6 +72,7 @@
             this.tbIme.Name = "tbIme";
             this.tbIme.Size = new System.Drawing.Size(138, 23);
             this.tbIme.TabIndex = 0;
+            this.tbIme.Validating += new System.ComponentModel.CancelEventHandler(this.tbIme_Validating);
             // 
             // tbPrezime
             // 
@@ -62,14 +80,17 @@
             this.tbPrezime.Name = "tbPrezime";
             this.tbPrezime.Size = new System.Drawing.Size(138, 23);
             this.tbPrezime.TabIndex = 2;
+            this.tbPrezime.Validating += new System.ComponentModel.CancelEventHandler(this.tbPrezime_Validating);
             // 
             // cbSpol
             // 
+            this.cbSpol.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbSpol.FormattingEnabled = true;
             this.cbSpol.Location = new System.Drawing.Point(116, 163);
             this.cbSpol.Name = "cbSpol";
             this.cbSpol.Size = new System.Drawing.Size(138, 23);
             this.cbSpol.TabIndex = 3;
+            this.cbSpol.Validating += new System.ComponentModel.CancelEventHandler(this.cbSpol_Validating);
             // 
             // dtpDatRodj
             // 
@@ -78,6 +99,7 @@
             this.dtpDatRodj.Name = "dtpDatRodj";
             this.dtpDatRodj.Size = new System.Drawing.Size(138, 23);
             this.dtpDatRodj.TabIndex = 4;
+            this.dtpDatRodj.Validating += new System.ComponentModel.CancelEventHandler(this.dtpDatRodj_Validating);
             // 
             // dtpIskustvo
             // 
@@ -86,6 +108,7 @@
             this.dtpIskustvo.Name = "dtpIskustvo";
             this.dtpIskustvo.Size = new System.Drawing.Size(165, 23);
             this.dtpIskustvo.TabIndex = 6;
+            this.dtpIskustvo.Validating += new System.ComponentModel.CancelEventHandler(this.dtpIskustvo_Validating);
             // 
             // lblIme
             // 
@@ -148,6 +171,7 @@
             this.rtbBiografija.Size = new System.Drawing.Size(165, 88);
             this.rtbBiografija.TabIndex = 14;
             this.rtbBiografija.Text = "";
+            this.rtbBiografija.Validating += new System.ComponentModel.CancelEventHandler(this.rtbBiografija_Validating);
             // 
             // lblCv
             // 
@@ -172,8 +196,10 @@
             // 
             this.tbFileName.Location = new System.Drawing.Point(383, 71);
             this.tbFileName.Name = "tbFileName";
+            this.tbFileName.ReadOnly = true;
             this.tbFileName.Size = new System.Drawing.Size(124, 23);
             this.tbFileName.TabIndex = 17;
+            this.tbFileName.Validating += new System.ComponentModel.CancelEventHandler(this.tbFileName_Validating);
             // 
             // lblTel
             // 
@@ -190,6 +216,8 @@
             this.tbTelefon.Name = "tbTelefon";
             this.tbTelefon.Size = new System.Drawing.Size(138, 23);
             this.tbTelefon.TabIndex = 18;
+            this.tbTelefon.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.tbTelefon_KeyPress);
+            this.tbTelefon.Validating += new System.ComponentModel.CancelEventHandler(this.tbTelefon_Validating);
             // 
             // btnSpasi
             // 
@@ -201,21 +229,54 @@
             this.btnSpasi.UseVisualStyleBackColor = true;
             this.btnSpasi.Click += new System.EventHandler(this.btnSpasi_Click);
             // 
-            // button1
+            // btnPonisti
             // 
-            this.button1.Location = new System.Drawing.Point(383, 218);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 21;
-            this.button1.Text = "Poništi";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnPonisti.Location = new System.Drawing.Point(383, 218);
+            this.btnPonisti.Name = "btnPonisti";
+            this.btnPonisti.Size = new System.Drawing.Size(75, 23);
+            this.btnPonisti.TabIndex = 21;
+            this.btnPonisti.Text = "Poništi";
+            this.btnPonisti.UseVisualStyleBackColor = true;
+            this.btnPonisti.Click += new System.EventHandler(this.btnPonisti_Click);
+            // 
+            // epIme
+            // 
+            this.epIme.ContainerControl = this;
+            // 
+            // epPrezime
+            // 
+            this.epPrezime.ContainerControl = this;
+            // 
+            // epDatumRodj
+            // 
+            this.epDatumRodj.ContainerControl = this;
+            // 
+            // epSpol
+            // 
+            this.epSpol.ContainerControl = this;
+            // 
+            // epTelefon
+            // 
+            this.epTelefon.ContainerControl = this;
+            // 
+            // epIskustvo
+            // 
+            this.epIskustvo.ContainerControl = this;
+            // 
+            // epCV
+            // 
+            this.epCV.ContainerControl = this;
+            // 
+            // epBiografija
+            // 
+            this.epBiografija.ContainerControl = this;
             // 
             // frmInstruktor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(564, 259);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnPonisti);
             this.Controls.Add(this.btnSpasi);
             this.Controls.Add(this.lblTel);
             this.Controls.Add(this.tbTelefon);
@@ -234,9 +295,18 @@
             this.Controls.Add(this.cbSpol);
             this.Controls.Add(this.tbPrezime);
             this.Controls.Add(this.tbIme);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "frmInstruktor";
             this.Text = "frmInstruktor";
             this.Load += new System.EventHandler(this.frmInstruktor_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.epIme)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epPrezime)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epDatumRodj)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epSpol)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epTelefon)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epIskustvo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epCV)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epBiografija)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -262,6 +332,14 @@
         private System.Windows.Forms.Label lblTel;
         private System.Windows.Forms.TextBox tbTelefon;
         private System.Windows.Forms.Button btnSpasi;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnPonisti;
+        private System.Windows.Forms.ErrorProvider epIme;
+        private System.Windows.Forms.ErrorProvider epPrezime;
+        private System.Windows.Forms.ErrorProvider epDatumRodj;
+        private System.Windows.Forms.ErrorProvider epSpol;
+        private System.Windows.Forms.ErrorProvider epTelefon;
+        private System.Windows.Forms.ErrorProvider epIskustvo;
+        private System.Windows.Forms.ErrorProvider epCV;
+        private System.Windows.Forms.ErrorProvider epBiografija;
     }
 }

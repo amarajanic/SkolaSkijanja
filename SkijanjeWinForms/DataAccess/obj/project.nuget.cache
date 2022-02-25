@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "rTriEE/LXTxay5peVJdiHn6pwwTCT4kQBhAkwI/vMEqlmL4+qAaXE/xK4vaicyOGPEva4wSn/xNdL//TDpMhhQ==",
+  "dgSpecHash": "Ef/j645eZbWyZCciHkdnZ43/Auj1ImHiw/bE9arwc2bexH6mzdrh73xaFGumaO8CYczvCe8LbmpR/NorydUEZw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Pc\\Desktop\\Test\\SkolaSkijanja-main\\SkijanjeWinForms\\DataAccess\\DataAccess.csproj",
+  "projectFilePath": "C:\\Users\\Pc\\Downloads\\rješenje_winforme (1)\\rješenje_winforme\\SkijanjeWinForms\\DataAccess\\DataAccess.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Pc\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Pc\\.nuget\\packages\\microsoft.entityframeworkcore\\6.0.1\\microsoft.entityframeworkcore.6.0.1.nupkg.sha512",

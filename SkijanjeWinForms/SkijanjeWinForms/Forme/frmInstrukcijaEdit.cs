@@ -21,7 +21,6 @@ namespace UI.Forme
         private int instrukcijaId;
         private int instruktorId;
 
-
         public frmInstrukcijaEdit(int instrukcijaId, int instruktorId)
         {
             InitializeComponent();
@@ -34,6 +33,8 @@ namespace UI.Forme
         {
             var instruktori = db.Instruktors.ToList();
 
+            var instrukcija = new InstrukcijaModel();
+
             var cbInstruktor = instruktori.Select(x => new InstruktorModel
             {
                 Id = x.Id,
@@ -45,10 +46,18 @@ namespace UI.Forme
 
             instrukcija_id.Value = instrukcijaId;
 
-            var instrukcija = db.InstrukcijaModels.FromSqlRaw("select * from fn_Instrukcija_select_by_id(@instrukcija_id)", instrukcija_id).ToList().First();
-
+            try
+            {
+                instrukcija = db.InstrukcijaModels.FromSqlRaw("select * from fn_Instrukcija_select_by_id(@instrukcija_id)", instrukcija_id).ToList().First();
+                dtpDatum.Text = instrukcija.Dat_Odr.ToString();
+                dtvTermin.Text = instrukcija.Termin.ToString();
+                nudBrCas.Text = instrukcija.Br_Cas.ToString();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Trenutno nije moguće preuzeti instrukcije!","Greška");
+            }
        
-
             var selectedInstruktor = db.Instruktors.Where(x => x.Id == instruktorId).ToList();
 
             var instruktorModel = selectedInstruktor.Select(x => new InstruktorModel
@@ -56,56 +65,109 @@ namespace UI.Forme
                 Id = x.Id,
                 ImePrezime = x.Ime + " " + x.Prezime
             }).First();
-
-          
       
-            dtpDatum.Text = instrukcija.Dat_Odr.ToString();
-            dtvTermin.Text = instrukcija.Termin.ToString();
-            nudBrCas.Text = instrukcija.Br_Cas.ToString();
+           
             cbInstruktori.DataSource = cbInstruktor;
             cbInstruktori.DisplayMember = "ImePrezime";
-
            
             if (cbInstruktori.SelectedItem as InstruktorModel != instruktorModel)
             {
                cbInstruktori.SelectedText = null;
                cbInstruktori.Text = instruktorModel.ImePrezime;
-
             }
-         
-            
+                    
             rtbBiljeske.Text = instrukcija.Biljeske;
-
         }
 
         private void btnDodajInstrukciju_Click(object sender, EventArgs e)
         {
-            var identifikator = new NpgsqlParameter("identifikator", NpgsqlTypes.NpgsqlDbType.Integer);
-            var d = new NpgsqlParameter("d", NpgsqlTypes.NpgsqlDbType.Date);
-            var t = new NpgsqlParameter("t", NpgsqlTypes.NpgsqlDbType.Time);
-            var bc = new NpgsqlParameter("bc", NpgsqlTypes.NpgsqlDbType.Integer);
-            var b = new NpgsqlParameter("b", NpgsqlTypes.NpgsqlDbType.Text);
-            var instruktor_id = new NpgsqlParameter("instruktor_id", NpgsqlTypes.NpgsqlDbType.Integer);
+            if (ValidateChildren(ValidationConstraints.Enabled))
+            {
+                var identifikator = new NpgsqlParameter("identifikator", NpgsqlTypes.NpgsqlDbType.Integer);
+                var d = new NpgsqlParameter("d", NpgsqlTypes.NpgsqlDbType.Date);
+                var t = new NpgsqlParameter("t", NpgsqlTypes.NpgsqlDbType.Time);
+                var bc = new NpgsqlParameter("bc", NpgsqlTypes.NpgsqlDbType.Integer);
+                var b = new NpgsqlParameter("b", NpgsqlTypes.NpgsqlDbType.Text);
+                var instruktor_id = new NpgsqlParameter("instruktor_id", NpgsqlTypes.NpgsqlDbType.Integer);
 
+                identifikator.Value = instrukcijaId;
+                d.Value = dtpDatum.Value.Date;
+                t.Value = dtvTermin.Value.TimeOfDay;
+                bc.Value = nudBrCas.Value;
+                b.Value = rtbBiljeske.Text;
 
-            identifikator.Value = instrukcijaId;
-            d.Value = dtpDatum.Value.Date;
-            t.Value = dtvTermin.Value.TimeOfDay;
-            bc.Value = nudBrCas.Value;
-            b.Value = rtbBiljeske.Text;
+                var imePrezime = cbInstruktori.Text.Split(" ");
 
-            var imePrezime = cbInstruktori.Text.Split(" ");
+                instruktor_id.Value = db.Instruktors.Where(x => x.Ime == imePrezime[0] && x.Prezime == imePrezime[1]).Select(x => x.Id).ToList().First();
+                try
+                {
+                    db.Database.ExecuteSqlRaw("select * from fn_Instrukcija_update(@identifikator,@d,@t,@bc,@b,@instruktor_id)", identifikator, d, t, bc, b, instruktor_id);
+                    MessageBox.Show("Instrukcija je uspješno uređena!");
+                }
+                catch (Exception)
+                {
+                    MessageBox.Show("Trenutno nije moguće urediti instrukciju!", "Greška");
+                }
 
-            instruktor_id.Value = db.Instruktors.Where(x => x.Ime == imePrezime[0] && x.Prezime == imePrezime[1]).Select(x => x.Id).ToList().First();
+                this.Close();
+            }
+           
 
+        }
 
-            db.Database.ExecuteSqlRaw("select * from fn_Instrukcija_update(@identifikator,@d,@t,@bc,@b,@instruktor_id)",identifikator, d, t, bc, b, instruktor_id);
+        private void btnPonisti_Click(object sender, EventArgs e)
+        {
+            dtpDatum.Value = DateTime.Today;
+            dtvTermin.Value = DateTime.Now;
+            nudBrCas.Value = 0;
+            rtbBiljeske.Text = String.Empty;
+            cbInstruktori.SelectedIndex = -1;
+        }
 
-            MessageBox.Show("Instrukcija je uspješno uređena!");
+        private void nudBrCas_Validating(object sender, CancelEventArgs e)
+        {
+            if (nudBrCas.Value <= 0)
+            {
+                e.Cancel = true;
+                nudBrCas.Focus();
+                epBrojCas.SetError(nudBrCas, "Broj časova ne može biti manji ili jednak 0");
+            }
+            else
+            {
+                e.Cancel = false;
+                epBrojCas.SetError(nudBrCas, "");
+            }
+        }
 
-            this.Close();
+        private void rtbBiljeske_Validating(object sender, CancelEventArgs e)
+        {
+            if (rtbBiljeske.Text == String.Empty)
+            {
+                e.Cancel = true;
+                rtbBiljeske.Focus();
+                epBiljeske.SetError(rtbBiljeske, "Polje bilješke ne može ostati prazno");
+            }
+            else
+            {
+                e.Cancel = false;
+                epBiljeske.SetError(rtbBiljeske, "");
 
+            }
+        }
 
+        private void cbInstruktori_Validating(object sender, CancelEventArgs e)
+        {
+            if (cbInstruktori.SelectedIndex <= -1)
+            {
+                e.Cancel = true;
+                cbInstruktori.Focus();
+                epInstruktor.SetError(cbInstruktori, "Morate odabrati instruktora");
+            }
+            else
+            {
+                e.Cancel = false;
+                epInstruktor.SetError(cbInstruktori, "");
+            }
         }
     }
 }

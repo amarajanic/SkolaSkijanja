@@ -25,3 +25,6 @@ C:\Users\Pc\Desktop\Test\SkolaSkijanja-main\SkijanjeWinForms\DataAccess\obj\Debu
 C:\Users\Pc\Desktop\Test\SkolaSkijanja-main\SkijanjeWinForms\DataAccess\obj\Debug\net6.0\ref\DataAccess.dll
 C:\Users\Pc\Desktop\Test\SkolaSkijanja-main\SkijanjeWinForms\DataAccess\obj\Debug\net6.0\DataAccess.pdb
 C:\Users\Pc\Desktop\Test\SkolaSkijanja-main\SkijanjeWinForms\DataAccess\obj\Debug\net6.0\DataAccess.genruntimeconfig.cache
+C:\Users\Pc\Desktop\Test\SkolaSkijanja-main\SkijanjeWinForms\DataAccess\obj\Debug\net6.0\DataAccess.csproj.AssemblyReference.cache
+C:\Users\Pc\Desktop\Test\SkolaSkijanja-main\SkijanjeWinForms\DataAccess\obj\Debug\net6.0\DataAccess.Properties.Resources.resources
+C:\Users\Pc\Desktop\Test\SkolaSkijanja-main\SkijanjeWinForms\DataAccess\obj\Debug\net6.0\DataAccess.csproj.GenerateResource.cache

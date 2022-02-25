@@ -2811,11 +2811,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Pc\\Desktop\\Test\\SkolaSkijanja-main\\SkijanjeWinForms\\SkijanjeWinForms\\UI.csproj",
+      "projectUniqueName": "C:\\Users\\Pc\\Downloads\\rješenje_winforme (1)\\rješenje_winforme\\SkijanjeWinForms\\SkijanjeWinForms\\UI.csproj",
       "projectName": "UI",
-      "projectPath": "C:\\Users\\Pc\\Desktop\\Test\\SkolaSkijanja-main\\SkijanjeWinForms\\SkijanjeWinForms\\UI.csproj",
+      "projectPath": "C:\\Users\\Pc\\Downloads\\rješenje_winforme (1)\\rješenje_winforme\\SkijanjeWinForms\\SkijanjeWinForms\\UI.csproj",
       "packagesPath": "C:\\Users\\Pc\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Pc\\Desktop\\Test\\SkolaSkijanja-main\\SkijanjeWinForms\\SkijanjeWinForms\\obj\\",
+      "outputPath": "C:\\Users\\Pc\\Downloads\\rješenje_winforme (1)\\rješenje_winforme\\SkijanjeWinForms\\SkijanjeWinForms\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet\\"
@@ -2836,8 +2836,8 @@
         "net6.0-windows7.0": {
           "targetAlias": "net6.0-windows",
           "projectReferences": {
-            "C:\\Users\\Pc\\Desktop\\Test\\SkolaSkijanja-main\\SkijanjeWinForms\\DataAccess\\DataAccess.csproj": {
-              "projectPath": "C:\\Users\\Pc\\Desktop\\Test\\SkolaSkijanja-main\\SkijanjeWinForms\\DataAccess\\DataAccess.csproj"
+            "C:\\Users\\Pc\\Downloads\\rješenje_winforme (1)\\rješenje_winforme\\SkijanjeWinForms\\DataAccess\\DataAccess.csproj": {
+              "projectPath": "C:\\Users\\Pc\\Downloads\\rješenje_winforme (1)\\rješenje_winforme\\SkijanjeWinForms\\DataAccess\\DataAccess.csproj"
             }
           }
         }

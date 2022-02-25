@@ -19,24 +19,28 @@ namespace UI.Forme
         skijanje_dbContext db;
         private int id;
 
-
         public frmInstrukcijaDetalji(int id)
         {
             InitializeComponent();
             db = new skijanje_dbContext();
             this.id = id;
-
         }
 
         private void frmInstrukcijaDetalji_Load(object sender, EventArgs e)
         {
+            InstrukcijaModel instrukcija = new InstrukcijaModel();
            var identifikator = new NpgsqlParameter("identifikator", NpgsqlTypes.NpgsqlDbType.Integer);
 
            identifikator.Value = id;
 
-           var instrukcija = db.InstrukcijaModels.FromSqlRaw("select * from fn_Instrukcija_select_by_id(@identifikator)", identifikator).ToList().First();
-
-   
+            try
+            {
+                instrukcija = db.InstrukcijaModels.FromSqlRaw("select * from fn_Instrukcija_select_by_id(@identifikator)", identifikator).ToList().First();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Trenutno nije moguće preuzeti instrukcije!", "Greška");
+            }
 
            tbImePrezime.Text = instrukcija.Ime + " " + instrukcija.Prezime;
            tbDatum.Text = instrukcija.Dat_Odr.ToString();
@@ -45,11 +49,19 @@ namespace UI.Forme
            tbBrojUcen.Text = instrukcija.Br_Ucen.ToString();
            rtbBiljeske.Text = instrukcija.Biljeske;
 
-            var ucenici = db.UcenikModels.FromSqlRaw("select * from fn_Unenik_select_by_instrukcija_id(@identifikator)", identifikator).ToList();
+            try
+            {
+                var ucenici = db.UcenikModels.FromSqlRaw("select * from fn_Ucenik_select_by_instrukcija_id(@identifikator)", identifikator).ToList();
 
-            dgvUcenici.DataSource = ucenici;
+                dgvUcenici.DataSource = ucenici;
 
-            dgvUcenici.Columns["id"].Visible = false;
+                dgvUcenici.Columns["id"].Visible = false;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Trenutno nije moguće preuzeti učenike!", "Greška");
+            }
+
 
         }
     }

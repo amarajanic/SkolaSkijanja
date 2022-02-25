@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.dtpDatum = new System.Windows.Forms.DateTimePicker();
             this.dtvTermin = new System.Windows.Forms.DateTimePicker();
             this.rtbBiljeske = new System.Windows.Forms.RichTextBox();
@@ -41,7 +42,13 @@
             this.btnDodajInstrukciju = new System.Windows.Forms.Button();
             this.btnPonisti = new System.Windows.Forms.Button();
             this.nudBrCas = new System.Windows.Forms.NumericUpDown();
+            this.epBrojCas = new System.Windows.Forms.ErrorProvider(this.components);
+            this.epInstruktor = new System.Windows.Forms.ErrorProvider(this.components);
+            this.epBiljeske = new System.Windows.Forms.ErrorProvider(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.nudBrCas)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epBrojCas)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epInstruktor)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epBiljeske)).BeginInit();
             this.SuspendLayout();
             // 
             // dtpDatum
@@ -68,6 +75,7 @@
             this.rtbBiljeske.Size = new System.Drawing.Size(357, 96);
             this.rtbBiljeske.TabIndex = 3;
             this.rtbBiljeske.Text = "";
+            this.rtbBiljeske.Validating += new System.ComponentModel.CancelEventHandler(this.rtbBiljeske_Validating);
             // 
             // lblDatOdr
             // 
@@ -107,11 +115,13 @@
             // 
             // cbInstruktori
             // 
+            this.cbInstruktori.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbInstruktori.FormattingEnabled = true;
             this.cbInstruktori.Location = new System.Drawing.Point(360, 17);
             this.cbInstruktori.Name = "cbInstruktori";
             this.cbInstruktori.Size = new System.Drawing.Size(121, 23);
             this.cbInstruktori.TabIndex = 8;
+            this.cbInstruktori.Validating += new System.ComponentModel.CancelEventHandler(this.cbInstruktori_Validating);
             // 
             // lblInstruktor
             // 
@@ -150,6 +160,7 @@
             this.btnPonisti.TabIndex = 12;
             this.btnPonisti.Text = "Poništi";
             this.btnPonisti.UseVisualStyleBackColor = true;
+            this.btnPonisti.Click += new System.EventHandler(this.btnPonisti_Click);
             // 
             // nudBrCas
             // 
@@ -157,6 +168,19 @@
             this.nudBrCas.Name = "nudBrCas";
             this.nudBrCas.Size = new System.Drawing.Size(100, 23);
             this.nudBrCas.TabIndex = 13;
+            this.nudBrCas.Validating += new System.ComponentModel.CancelEventHandler(this.nudBrCas_Validating);
+            // 
+            // epBrojCas
+            // 
+            this.epBrojCas.ContainerControl = this;
+            // 
+            // epInstruktor
+            // 
+            this.epInstruktor.ContainerControl = this;
+            // 
+            // epBiljeske
+            // 
+            this.epBiljeske.ContainerControl = this;
             // 
             // frmInstrukcija
             // 
@@ -176,10 +200,14 @@
             this.Controls.Add(this.rtbBiljeske);
             this.Controls.Add(this.dtvTermin);
             this.Controls.Add(this.dtpDatum);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "frmInstrukcija";
             this.Text = "frmInstrukcija";
             this.Load += new System.EventHandler(this.frmInstrukcija_Load);
             ((System.ComponentModel.ISupportInitialize)(this.nudBrCas)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epBrojCas)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epInstruktor)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.epBiljeske)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -200,5 +228,8 @@
         private System.Windows.Forms.Button btnDodajInstrukciju;
         private System.Windows.Forms.Button btnPonisti;
         private System.Windows.Forms.NumericUpDown nudBrCas;
+        private System.Windows.Forms.ErrorProvider epBrojCas;
+        private System.Windows.Forms.ErrorProvider epInstruktor;
+        private System.Windows.Forms.ErrorProvider epBiljeske;
     }
 }

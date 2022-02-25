@@ -46,6 +46,9 @@
             // 
             // dgvDostupniUcenici
             // 
+            this.dgvDostupniUcenici.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvDostupniUcenici.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvDostupniUcenici.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDostupniUcenici.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -69,6 +72,7 @@
             this.ClientSize = new System.Drawing.Size(719, 307);
             this.Controls.Add(this.dgvDostupniUcenici);
             this.Controls.Add(this.btnNoviUcenik);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "frmDostupniUcenici";
             this.Text = "frmDostupniUcenici";
             this.Load += new System.EventHandler(this.frmDostupniUcenici_Load);

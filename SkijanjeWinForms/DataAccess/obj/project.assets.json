@@ -747,11 +747,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Pc\\Desktop\\Test\\SkolaSkijanja-main\\SkijanjeWinForms\\DataAccess\\DataAccess.csproj",
+      "projectUniqueName": "C:\\Users\\Pc\\Downloads\\rješenje_winforme (1)\\rješenje_winforme\\SkijanjeWinForms\\DataAccess\\DataAccess.csproj",
       "projectName": "DataAccess",
-      "projectPath": "C:\\Users\\Pc\\Desktop\\Test\\SkolaSkijanja-main\\SkijanjeWinForms\\DataAccess\\DataAccess.csproj",
+      "projectPath": "C:\\Users\\Pc\\Downloads\\rješenje_winforme (1)\\rješenje_winforme\\SkijanjeWinForms\\DataAccess\\DataAccess.csproj",
       "packagesPath": "C:\\Users\\Pc\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Pc\\Desktop\\Test\\SkolaSkijanja-main\\SkijanjeWinForms\\DataAccess\\obj\\",
+      "outputPath": "C:\\Users\\Pc\\Downloads\\rješenje_winforme (1)\\rješenje_winforme\\SkijanjeWinForms\\DataAccess\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet\\"

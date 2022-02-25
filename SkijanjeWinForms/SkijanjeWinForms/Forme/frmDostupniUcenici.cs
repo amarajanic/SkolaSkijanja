@@ -41,12 +41,46 @@ namespace UI.Forme
                 RefreshGrid();             
             }
 
-
         }
 
         private void frmDostupniUcenici_Load(object sender, EventArgs e)
         {
             RefreshGrid();
+        }
+
+        private void dgvDostupniUcenici_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var senderGrid = (DataGridView)sender;
+
+            if (dgvDostupniUcenici.DataSource != null)
+            {
+                if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
+                {
+                    if (senderGrid.Columns[e.ColumnIndex] == dgvDostupniUcenici.Columns["dgvBtnOdaberi"])
+                    {
+                        DataGridViewRow row = dgvDostupniUcenici.Rows[e.RowIndex];
+
+                        var ucenikId = (int)row.Cells[1].Value;
+
+                        var ucenik_id = new NpgsqlParameter("ucenik_id", NpgsqlTypes.NpgsqlDbType.Integer);
+                        var instrukcija_id = new NpgsqlParameter("instrukcija_id", NpgsqlTypes.NpgsqlDbType.Integer);
+
+                        ucenik_id.Value = ucenikId;
+                        instrukcija_id.Value = instrukcijaId;
+
+                        try
+                        {
+                            db.Database.ExecuteSqlRaw("select * from fn_Ucenik_instrukcija_insert(@ucenik_id,@instrukcija_id)", ucenik_id, instrukcija_id);
+                        }
+                        catch (Exception)
+                        {
+                            MessageBox.Show("Akcija nije odrađena!","Greška");
+                        }
+
+                        RefreshGrid();
+                    }
+                }
+            }
         }
 
         void RefreshGrid()
@@ -67,55 +101,28 @@ namespace UI.Forme
 
             identifikator.Value = instrukcijaId;
 
-            var ucenici = db.UcenikModels.FromSqlRaw("select * from fn_Ucenik_select_by_instrukcija_id(@identifikator)", identifikator).ToList();
-
-
-            for (int i = 0; i < ucenici.Count; i++)
+            try
             {
-                for (int j = 0; j < uceniciSvi.Count; j++)
+                var ucenici = db.UcenikModels.FromSqlRaw("select * from fn_Ucenik_select_by_instrukcija_id(@identifikator)", identifikator).ToList();
+
+                for (int i = 0; i < ucenici.Count; i++)
                 {
-                    if (uceniciSvi[j].Id == ucenici[i].Id)
+                    for (int j = 0; j < uceniciSvi.Count; j++)
                     {
-                        uceniciSvi.RemoveAt(j);
+                        if (uceniciSvi[j].Id == ucenici[i].Id)
+                        {
+                            uceniciSvi.RemoveAt(j);
+                        }
                     }
                 }
+
+                dgvDostupniUcenici.DataSource = uceniciSvi;
+                dgvDostupniUcenici.Columns["id"].Visible = false;
             }
-
-            dgvDostupniUcenici.DataSource = uceniciSvi;
-            dgvDostupniUcenici.Columns["id"].Visible = false;
-
-        }
-
-        private void dgvDostupniUcenici_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            var senderGrid = (DataGridView)sender;
-
-
-            if (dgvDostupniUcenici.DataSource != null)
+            catch (Exception)
             {
-                if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
-                {
-                    if (senderGrid.Columns[e.ColumnIndex] == dgvDostupniUcenici.Columns["dgvBtnOdaberi"])
-                    {
-                        DataGridViewRow row = dgvDostupniUcenici.Rows[e.RowIndex];
-
-                        var ucenikId = (int)row.Cells[1].Value; //za sada
-
-                        var ucenik_id = new NpgsqlParameter("ucenik_id", NpgsqlTypes.NpgsqlDbType.Integer);
-                        var instrukcija_id = new NpgsqlParameter("instrukcija_id", NpgsqlTypes.NpgsqlDbType.Integer);
-
-                        ucenik_id.Value = ucenikId;
-                        instrukcija_id.Value = instrukcijaId;
-
-
-                        db.Database.ExecuteSqlRaw("select * from fn_Ucenik_instrukcija_insert(@ucenik_id,@instrukcija_id)", ucenik_id, instrukcija_id);
-
-
-                        RefreshGrid();
-
-                    }
-                }
-            }
+                MessageBox.Show("Trenutno nije moguće osvježiti grid!","Greška");
+            }       
         }
     }
 }

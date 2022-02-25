@@ -189,6 +189,7 @@
             this.Controls.Add(this.tbBrojUcen);
             this.Controls.Add(this.tbBrojCas);
             this.Controls.Add(this.tbImePrezime);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Name = "frmInstrukcijaDetalji";
             this.Text = "frmInstrukcijaDetalji";
             this.Load += new System.EventHandler(this.frmInstrukcijaDetalji_Load);

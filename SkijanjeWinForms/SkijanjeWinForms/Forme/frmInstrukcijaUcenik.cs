@@ -20,7 +20,6 @@ namespace UI.Forme
         private int instrukcijaId;
         public frmInstrukcijaUcenik(int id)
         {
-
             InitializeComponent();
             db = new skijanje_dbContext();
             instrukcijaId = id;
@@ -36,24 +35,11 @@ namespace UI.Forme
             frmDostupniUcenici frm = new frmDostupniUcenici(instrukcijaId);
             frm.FormClosing += new FormClosingEventHandler(UcenikDodajFormClosing);
             frm.Show();
-
-
-
         }
 
         private void UcenikDodajFormClosing(object sender, FormClosingEventArgs e)
         {
             RefreshDataGrid();
-        }
-
-        private void btnDostupniUc_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dgvUcenici_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
         }
 
         private void RefreshDataGrid()
@@ -64,13 +50,20 @@ namespace UI.Forme
 
             identifikator.Value = instrukcijaId;
 
-            var ucenici = db.UcenikModels.FromSqlRaw("select * from fn_Unenik_select_by_instrukcija_id(@identifikator)", identifikator).ToList();
+            try
+            {
+                var ucenici = db.UcenikModels.FromSqlRaw("select * from fn_Ucenik_select_by_instrukcija_id(@identifikator)", identifikator).ToList();
 
+                dgvUcenici.DataSource = ucenici;
 
+                dgvUcenici.Columns["id"].Visible = false;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Trenutno nije moguće preuzeti učenike!", "Greška");
+            }
 
-            dgvUcenici.DataSource = ucenici;
-
-            dgvUcenici.Columns["id"].Visible = false;
+           
         }
     }
 }

@@ -19,16 +19,10 @@ namespace UI.Forme
     {
         skijanje_dbContext db;
 
-        
         public frmPocetna()
         {
             InitializeComponent();
              db = new skijanje_dbContext();
-
-        }
-
-        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
-        {
 
         }
 
@@ -53,33 +47,28 @@ namespace UI.Forme
 
             dtpKraj.Value = DateTime.Today.AddDays(6);
 
-    
- 
+            RefreshDataGrid();
 
         }
 
         private void btnPretrazi_Click(object sender, EventArgs e)
         {     
-            
             RefreshDataGrid();
-
         }
 
         private void btnDodajInstrukciju_Click(object sender, EventArgs e)
-        {
-           
-                frmInstrukcija frm = new frmInstrukcija();
-                frm.FormClosing += new FormClosingEventHandler(InstrukcijaFormClosing);
-                frm.ShowDialog();
-            
-            
+        {       
+            frmInstrukcija frm = new frmInstrukcija();
+            frm.FormClosing += new FormClosingEventHandler(InstrukcijaFormClosing);
+            frm.ShowDialog();            
         }
 
         private void InstrukcijaFormClosing(object sender, FormClosingEventArgs e)
         {
             if(dgvInstrukcije.DataSource!=null)
-            RefreshDataGrid();
-
+            {
+                RefreshDataGrid();
+            }
         }
 
         private void InstrukcijaEditFormClosing(object sender, EventArgs e)
@@ -87,14 +76,10 @@ namespace UI.Forme
             RefreshDataGrid();
         }
 
-        private void cbInstruktori_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void dgvInstrukcije_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             var senderGrid = (DataGridView)sender;
+
             if(dgvInstrukcije.DataSource!=null)
             {
                 if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn && e.RowIndex >= 0)
@@ -103,7 +88,7 @@ namespace UI.Forme
                     {
                         DataGridViewRow row = dgvInstrukcije.Rows[e.RowIndex];
 
-                        var Id = (int)row.Cells[4].Value; //za sada
+                        var Id = (int)row.Cells[4].Value; 
 
                         frmInstrukcijaDetalji frm = new frmInstrukcijaDetalji(Id);
 
@@ -113,7 +98,7 @@ namespace UI.Forme
                     {
                         DataGridViewRow row = dgvInstrukcije.Rows[e.RowIndex];
 
-                        var instrukcijaId = (int)row.Cells[4].Value; //za sada
+                        var instrukcijaId = (int)row.Cells[4].Value; 
 
                         var instruktorId = int.Parse(row.Cells[11].Value.ToString());
 
@@ -122,17 +107,15 @@ namespace UI.Forme
 
                         frm.Show();
 
-
-
-                        MessageBox.Show("Test");
                     }
                     else if (senderGrid.Columns[e.ColumnIndex] == dgvInstrukcije.Columns["dgvBtnUcenici"])
                     {
                         DataGridViewRow row = dgvInstrukcije.Rows[e.RowIndex];
 
-                        var instrukcijaId = (int)row.Cells[4].Value; //za sada
+                        var instrukcijaId = (int)row.Cells[4].Value; 
 
                         frmInstrukcijaUcenik frm = new frmInstrukcijaUcenik(instrukcijaId);
+                        frm.FormClosing += new FormClosingEventHandler(InstrukcijaEditFormClosing);
 
                         frm.Show();
                     }
@@ -143,14 +126,21 @@ namespace UI.Forme
                         {
                             var identifikator = new NpgsqlParameter("identifikator", NpgsqlTypes.NpgsqlDbType.Integer);
 
-
                             DataGridViewRow row = dgvInstrukcije.Rows[e.RowIndex];
 
-                            var instrukcijaId = (int)row.Cells[4].Value; //za sada
+                            var instrukcijaId = (int)row.Cells[4].Value; 
 
                             identifikator.Value = instrukcijaId;
 
-                            db.Database.ExecuteSqlRaw("select * from fn_Instrukcija_delete(@identifikator)", identifikator);
+                            try
+                            {
+                                db.Database.ExecuteSqlRaw("select * from fn_Instrukcija_delete(@identifikator)", identifikator);
+                            }
+                            catch (Exception)
+                            {
+                                MessageBox.Show("Trenutno nije moguće obrisati podatke!", "Greška");
+                            }
+
 
                             RefreshDataGrid();
                         }
@@ -159,13 +149,8 @@ namespace UI.Forme
 
                         }
                     }
-
-
                 }
-
             }
-
-
 
         }
 
@@ -173,14 +158,11 @@ namespace UI.Forme
         {
             dgvInstrukcije.DataSource = null;
 
-
             var p = dtpPocetak.Value.Date;
 
             var k = dtpKraj.Value.Date;
 
             var imePrezime = cbInstruktori.Text.Split(" ");
-
-
 
 
             var pocetak = new NpgsqlParameter("pocetak", NpgsqlTypes.NpgsqlDbType.Date);
@@ -194,21 +176,31 @@ namespace UI.Forme
 
 
             pocetak.Value = p;
-
             kraj.Value = k;
 
+            if (!string.IsNullOrEmpty(imePrezime[0]) && !string.IsNullOrEmpty(imePrezime[1]))
+            {
+                ime.Value = imePrezime[0];
+                prezime.Value = imePrezime[1];
+            }
+            else
+            {
+                ime.Value = string.Empty;
+                prezime.Value = string.Empty;
+            }
 
-            ime.Value = imePrezime[0];
-            prezime.Value = imePrezime[1];
-
-
-
-            var instrukcije = db.InstrukcijaPocetnaModels.FromSqlRaw("select * from fn_Instruktor_ime_prezime_datum(@ime,@prezime,@pocetak,@kraj)", ime, prezime, pocetak, kraj).ToList();
-
-            dgvInstrukcije.DataSource = instrukcije;
-
-            dgvInstrukcije.Columns["id"].Visible = false;
-            dgvInstrukcije.Columns["InstruktorId"].Visible = false;
+            try
+            {
+                var instrukcije = db.InstrukcijaPocetnaModels.FromSqlRaw("select * from fn_Instruktor_select_by_ime_prezime_datum(@ime,@prezime,@pocetak,@kraj)", ime, prezime, pocetak, kraj).ToList();
+                dgvInstrukcije.DataSource = instrukcije;
+                dgvInstrukcije.Columns["id"].Visible = false;
+                dgvInstrukcije.Columns["InstruktorId"].Visible = false;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Trenutno nije moguće dohvatiti podatke!","Greška");
+            }
+            
         }
     }
 }

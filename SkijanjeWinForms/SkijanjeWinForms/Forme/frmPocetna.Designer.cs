@@ -32,12 +32,12 @@
             this.dgvBtnDetalji = new System.Windows.Forms.DataGridViewButtonColumn();
             this.dgvBtnPromijeni = new System.Windows.Forms.DataGridViewButtonColumn();
             this.dgvBtnUcenici = new System.Windows.Forms.DataGridViewButtonColumn();
+            this.dgvBtnObrisi = new System.Windows.Forms.DataGridViewButtonColumn();
             this.dtpPocetak = new System.Windows.Forms.DateTimePicker();
             this.dtpKraj = new System.Windows.Forms.DateTimePicker();
             this.cbInstruktori = new System.Windows.Forms.ComboBox();
             this.btnPretrazi = new System.Windows.Forms.Button();
             this.btnDodajInstrukciju = new System.Windows.Forms.Button();
-            this.dgvBtnObrisi = new System.Windows.Forms.DataGridViewButtonColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInstrukcije)).BeginInit();
             this.SuspendLayout();
             // 
@@ -77,13 +77,17 @@
             this.dgvBtnUcenici.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvBtnUcenici.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
             // 
+            // dgvBtnObrisi
+            // 
+            this.dgvBtnObrisi.HeaderText = "Obriši";
+            this.dgvBtnObrisi.Name = "dgvBtnObrisi";
+            // 
             // dtpPocetak
             // 
             this.dtpPocetak.Location = new System.Drawing.Point(156, 108);
             this.dtpPocetak.Name = "dtpPocetak";
             this.dtpPocetak.Size = new System.Drawing.Size(136, 23);
             this.dtpPocetak.TabIndex = 1;
-            this.dtpPocetak.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
             // 
             // dtpKraj
             // 
@@ -94,12 +98,12 @@
             // 
             // cbInstruktori
             // 
+            this.cbInstruktori.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbInstruktori.FormattingEnabled = true;
             this.cbInstruktori.Location = new System.Drawing.Point(12, 109);
             this.cbInstruktori.Name = "cbInstruktori";
             this.cbInstruktori.Size = new System.Drawing.Size(121, 23);
             this.cbInstruktori.TabIndex = 3;
-            this.cbInstruktori.SelectedIndexChanged += new System.EventHandler(this.cbInstruktori_SelectedIndexChanged);
             // 
             // btnPretrazi
             // 
@@ -120,11 +124,6 @@
             this.btnDodajInstrukciju.Text = "Dodaj Instrukciju";
             this.btnDodajInstrukciju.UseVisualStyleBackColor = true;
             this.btnDodajInstrukciju.Click += new System.EventHandler(this.btnDodajInstrukciju_Click);
-            // 
-            // dgvBtnObrisi
-            // 
-            this.dgvBtnObrisi.HeaderText = "Obriši";
-            this.dgvBtnObrisi.Name = "dgvBtnObrisi";
             // 
             // frmPocetna
             // 
